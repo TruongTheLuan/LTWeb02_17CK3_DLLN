@@ -20,7 +20,7 @@ class GiaoDich extends Model {
             }
         })
     }
-    
+    //them giao dich
     static async add(SoTaiKhoan, SoTienGiaoDich,MaLoaiTaiKhoan, LoaiHinhThuc, NgayThucHien, DonViTienTe){
         return GiaoDich.create({
             SoTaiKhoan,
@@ -33,7 +33,7 @@ class GiaoDich extends Model {
             DonViTienTe
         });
     }
-    
+    //dem giao dich
     static async countLuotGD(){
        return GiaoDich.count({
         
