@@ -13,14 +13,15 @@ const db = require('./db');
     // Kỳ hạn (TKTK)
 
 class TaiKhoanThanhToan extends Model {
+    //tìm account bằng mã khách hàng
     static async findAccountById(id) {
         return TaiKhoanThanhToan.findByPk(id);
     }
-
+     //tìm toàn bộ account không điều kiện
     static async findAllAccount(){
         return TaiKhoanThanhToan.findAll();
     }
-     
+     //khóa tài khoản
     static async lockedAccount(SoTaiKhoan){
         return await TaiKhoanThanhToan.update({
             isLocked: true
@@ -30,7 +31,7 @@ class TaiKhoanThanhToan extends Model {
             }
         });
     }
-
+    //tìm toàn bộ account bằng stk
     static async findAllAccountBySTK(SoTaiKhoan){
         return TaiKhoanThanhToan.findAll({
             where: {
@@ -38,7 +39,7 @@ class TaiKhoanThanhToan extends Model {
             }
         });
     }
-
+    //thêm tài khoản mới
     static async add(SoTaiKhoan, SoDu, DonViTienTe, NgayMo , MaKhachHang ){
         return TaiKhoanThanhToan.create({
             SoTaiKhoan,
@@ -49,7 +50,7 @@ class TaiKhoanThanhToan extends Model {
             MaKhachHang
         });       
     }
-
+     //cập nhật số tiền
     static async updateSoTien(SoTaiKhoan, SoTien){
         let TaiKhoan = await this.findAccountBySoTaiKhoan(SoTaiKhoan);
         return await TaiKhoanThanhToan.update({
@@ -60,7 +61,7 @@ class TaiKhoanThanhToan extends Model {
             } 
         });
     }
-
+    //tìm toàn bộ account bằng stk
     static async findAccountBySoTaiKhoan(SoTaiKhoan){
         return TaiKhoanThanhToan.findOne({
             where: {
