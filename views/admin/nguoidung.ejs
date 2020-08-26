@@ -1,0 +1,157 @@
+<%  
+ function format_date(current_datetime){
+     return current_datetime.getDate() + "/" + (current_datetime.getMonth() + 1) + "/" + current_datetime.getFullYear();
+ }
+%>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="/css/admin-styles.css" />
+    <link type="text/css" rel="stylesheet" href="/css/font-awesome.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/admin-js.js"></script>
+
+    <title>Admin Homepage - Trang Quản Lí DLLN Bank</title>
+</head>
+
+<body>
+       <%  
+          function format_date(current_datetime){
+              return current_datetime.getDate() + "/" + (current_datetime.getMonth() + 1) + "/" + current_datetime.getFullYear();
+          }
+        %>
+    <div class="wrapper">
+        <!-- header -->
+        <%- include('../templates/admin_header'); -%>
+        <div id="content">
+            <!-- navbar -->
+            <%- include('../templates/admin_navbar'); -%>
+            <div>
+                <div>
+                    <h2>Thông tin Người Dùng</h2>
+                    
+                    
+                    <form action="/admin/nguoi-dung/tim-kiem" method="post">
+                      <div class="input-group mb-3">
+                        <input type="text" class="form-control"
+                         placeholder="Tìm Kiếm Thông Tin Theo Username" 
+                         name="username">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary">Tìm Kiếm</button>
+                        </div>
+                      </div>
+                    </form>
+
+                    <% if(users.length != 0){ %>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">STT</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Giới Tính</th>
+                                <th scope="col">Họ Và Tên</th>
+                                <th>Số Tài Khoản</th>
+                                <th>Ngày Sinh</th>
+                                <th>CMND</th>
+                                <th>Ngày Cấp</th>
+                                <th>
+                                    Nơi Cấp
+                                </th>
+                                <th scope="col">Trạng Thái</th>
+                                <!-- đang chờ xét duyệt(token) , thành viên(role) ,  admin (role) -->
+                                <th scope="col" colspan="3">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+
+
+                                <% users.forEach(function(user, index){ %>
+                            <tr>
+                                <th scope="row"><%= index %></th>
+                                <td>
+                                    <%= user.Username %>
+                                </td>
+
+                                <td>
+                                    <%= user.email %>
+                                </td>
+                                <td>
+                                    <% if(user.sex){ %>
+                                    Nam
+                                    <% } else { %>
+                                    Nữ
+                                    <% } %>
+                                </td>
+
+                                <td>
+                                    <%= user.fullname %>
+                                </td>
+                                <td>
+                                    <%= user.STK %>
+                                </td>
+
+                                <td>
+                                    <%= format_date(user.birth) %>
+                                </td>
+                                <td>
+                                    <%=  user.IDCard %>
+                                </td>
+                                <td>
+                                    <%= format_date(user.ngaycap)  %>
+                                </td>
+                                <td>
+                                    <%= user.noicap %>
+                                </td>
+                                <td>
+                                    <% if(user.token){ %>
+                                    Đang Chờ Duyệt
+                                    <% } else {%>
+                                    <% if(user.isLocked){ %>
+                                    <b class="text-danger">KHÓA</b>
+                                    <% } else { %>
+                                    <% if(user.role == 1){ %>
+                                    <b class="text-primary">ADMIN</b>
+                                    <% } else { %>
+                                    Thành Viên
+                                    <% }  %>
+                                    <% } %>
+                                    <% } %>
+                                </td>
+                                <td>
+                                    <form action="/admin/nguoidung/locked" method="post">
+                                        <input type="hidden" name="id" value="<%=user.id%>">
+                                        <button class="btn btn-outline-danger btn-sm">Khóa</button>
+                                    </form>
+
+                                    <form action="/admin/nguoidung/edit" method="post">
+                                        <input type="hidden" name="id" value="<%=user.id%>">
+                                        <button class="btn btn-outline-success btn-sm">Sửa</button>
+                                    </form>
+                                </td>
+
+                            </tr>
+                            <% }); %>
+                            <% } else{ %>
+                            <p>Hiện Tại DLLN Bank Không Có Khách Hàng Mới</p>
+                            <% } %>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+</body>
+
+</html>

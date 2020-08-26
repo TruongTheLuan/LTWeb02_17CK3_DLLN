@@ -1,0 +1,107 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link type="text/css" rel="stylesheet" href="/css/admin-styles.css" />
+  <link type="text/css" rel="stylesheet" href="/css/font-awesome.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+  </script>
+  <script src="/js/jquery-3.2.1.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/admin-js.js"></script>
+
+  <title>Admin Homepage - Trang Quản Lí DLLN Bank</title>
+</head>
+
+<body>
+  <%  
+          function format_date(current_datetime){
+              return current_datetime.getDate() + "/" + (current_datetime.getMonth() + 1) + "/" + current_datetime.getFullYear();
+          }
+        %>
+  <div class="wrapper">
+    <!-- header -->
+    <%- include('../templates/admin_header'); -%>
+    <div id="content">
+      <!-- navbar -->
+      <%- include('../templates/admin_navbar'); -%>
+      <div>
+
+        <h2>Thông tin tài khoản thanh toán</h2>
+        <form action="/admin/account/tai-khoan-thanh-toan/tim-kiem" method="post">
+          <div class="input-group mb-3">
+            <input type="text" 
+            class="form-control" 
+            placeholder="Tìm Kiếm Thông Tin Giao dịch theo Số Tài Khoản" 
+            name="sotaikhoan">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary">Tìm Kiếm</button>
+            </div>
+          </div>
+        </form>
+        <a href="/admin/account/tai-khoan-thanh-toan/them-moi" class="btn btn-outline-primary btn-sm">Thêm Mới Tài Khoản</a>
+        
+        <% if(taikhoans.length != 0){ %>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">STT</th>
+              <th scope="col">Số Tài Khoản</th>
+              <th scope="col">Số Dư</th>
+              <th scope="col">Đơn Vị Tiền Tệ</th>
+              <th scope="col">Tình Trạng</th>
+              <th scope="col">Ngày Mở</th>
+              <th scope="col">Mã Khách Hàng</th>
+              <th>
+                thao tác
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            
+
+              <% taikhoans.forEach(function(taikhoan, index){ %>
+                <tr>
+              <th scope="row"><%= index %></th>
+              <td><%= taikhoan.SoTaiKhoan %></td>
+              <td><%= taikhoan.SoDu %></td>
+              <td><%= taikhoan.DonViTienTe %></td>
+              <% if(taikhoan.isLocked){%>
+              <td class="text-danger">KHÓA</td>
+              <% } else{ %>
+              <td>MỞ</td>
+              <% } %>
+              <td><%= format_date(taikhoan.NgayMo) %></td>
+              <td><%= taikhoan.MaKhachHang %></td>
+              <td>
+
+
+                <!-- NẾU TÀI KHOẢN KHÓA THÌ KHÓA CÒN NGƯỢC LẠI LÀ MỞ -->
+                <form action="/admin/account/tai-khoan-thanh-toan/lock" method="post">
+                  <input type="hidden" name="stk" value="<%= taikhoan.SoTaiKhoan %>">
+                  <button class="btn btn-outline-danger btn-sm">Khóa Tài Khoản</button>
+                </form>
+
+                <form action="/admin/account/tai-khoan-thanh-toan/edit" method="post">
+                  <input type="hidden" name="stk" value="<%= taikhoan.SoTaiKhoan %>">
+                  <button class="btn btn-outline-success btn-sm">Cập Nhật Tài Khoản</button>
+                </form>
+
+              </td>
+                </tr>
+              <% }); %>
+
+            
+          </tbody>
+        </table>
+        <% } else { %>
+        <p>Hiện Tại DLLN Bank Chưa Có Bất Kì Tài Khoản Thanh Toán Nào</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

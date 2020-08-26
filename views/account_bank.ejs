@@ -1,0 +1,100 @@
+<%- include('templates/header'); -%>
+
+<!-- 
+    Quản lý các tài khoản:
+    Số tài khoản (duy nhất trong một ngân hàng)
+    Số dư
+    Đơn vị tiền tệ: VND/USD
+    Lịch sử giao dịch: Theo khoảng thời gian được yêu cầu
+    Tình trạng: đóng/mở
+    Lãi suất/năm (TKTK)
+    Ngày mở
+    Ngày đóng (TKTK)
+    Kỳ hạn (TKTK)
+-->
+<style>
+    body{
+        font-family: 'Coda', cursive;
+    }
+</style>
+
+<section class="blog-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+
+
+                <!-- javascript -->
+                <%  
+                    function format_date(current_datetime){
+                        return current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate();
+                    }
+                %>
+
+                <% if (thanhtoans) { %>
+                    <% thanhtoans.forEach(function (thanhtoan, index){ %>
+                        <div class="card pt-5 pl-5 pr-5 pb-3 mb-4 ml-2">
+                            <div class="d-flex">
+                                <h3 class="card-title text-info">TÀI KHOẢN THANH TOÁN</h3>
+                                <% if(thanhtoan.isLocked) { %>
+                                    <p class="trangthai text-account ml-4 text-danger font-weight-bold">ĐÓNG</p>
+                                <% } else { %> 
+                                    <p class="trangthai text-account ml-4 text-info font-weight-bold">MỞ</p>    
+                                <% } %> 
+                                <p class="text-account ml-4"><%= format_date(thanhtoan.NgayMo) %></p>
+                                <p class="text-account ml-4 text-info font-weight-bold"><%= thanhtoan.SoTaiKhoan %></p>
+                            </div>
+                            <div class="d-flex">
+                                <p class="text-dark" style="font-size: 35px;">
+                                    <%= thanhtoan.SoDu %>
+                                </p>
+                                <p class="mt-3">
+                                    <%= thanhtoan.DonViTienTe %>
+                                </p>
+                            </div>
+                            <div class="d-flex">
+                                
+                                <p>
+                                    NGÀY MỞ:<%= format_date(thanhtoan.NgayMo) %>
+                                </p>
+                               
+                            </div>
+                        </div>
+                    <% }) %> 
+                <% } %>  
+                
+               
+
+            </div>
+             <div class="col-lg-4 col-md-6 sidebar">
+                <div class="sb-widget mt-3">
+                    <h2 class="sb-title">Menu</h2>
+                    <ul>
+                        <li><a href="#">Thêm Tài Khoản Mới</a></li>
+                        <li><a href="#">Xem Giao dịch chuyển đổi</a></li>
+                        <li><a href="#">Hỗ Trợ Trực Tiếp</a></li>
+                    </ul>
+                </div>
+               
+                
+            </div> 
+        </div>
+    </div>
+</section>
+<!-- Blog Section end -->
+
+<!-- Score Section end -->
+<section class="score-section text-white set-bg" data-setbg="img/score-bg.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6 col-lg-8">
+                <h2>Calculate my Score</h2>
+                <h4>Check your credit reports as often as you want, it won't affect your scores.</h4>
+                <a href="#" class="site-btn sb-big">show my score</a>
+            </div>
+        </div>
+        <img src="img/hand.png" alt="" class="hand-img">
+    </div>
+</section>
+<!-- Hero Section end -->
+<%- include('templates/footer'); -%>

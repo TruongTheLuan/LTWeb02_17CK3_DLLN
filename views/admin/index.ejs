@@ -1,0 +1,259 @@
+<html>
+	<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="/css/admin-styles.css" />
+		<link type="text/css" rel="stylesheet" href="/css/font-awesome.min.css" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="/js/jquery-3.2.1.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+    <script src="/js/admin-js.js"></script>
+        
+		<title>Admin Homepage - Trang Quản Lí DLLN Bank</title>
+	</head>
+	
+	<body>
+        <%  
+          function format_date(current_datetime){
+              return current_datetime.getDate() + "/" + (current_datetime.getMonth() + 1) + "/" + current_datetime.getFullYear();
+          }
+
+          
+
+        %>
+        <div class="wrapper">
+            <!-- header -->
+            <%- include('../templates/admin_header'); -%>
+            <div id="content">
+                <!-- navbar -->
+                <%- include('../templates/admin_navbar'); -%>
+                <div>
+                    <div class="row">
+                        <div class="col border-top-0 border-right-0 border-bottom-0 border-primary card mb-3 ml-3 w-75 bg-midnight-bloom widget-content">
+                            <div class="widget-content-left">
+                                <div class="widget-heading text-white" >Tổng User</div>
+                                <div class="widget-subheading text-white">Thống Kê Mới Nhất</div>
+                            </div>
+                            <div class="widget-content-right">
+                                <div class="widget-numbers text-white">
+                                    <span id="tongUser"><%= tongUser %></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col border-top-0 border-right-0 border-bottom-0 border-primary card mb-3 ml-3 w-75 bg-arielle-smile widget-content">
+                            <div class="widget-content-left">
+                                <div class="widget-heading text-white" >Số Lượt Giao Dịch</div>
+                                <div class="widget-subheading text-white" >Thống Kê Mới Nhất</div>
+                            </div>
+                            <div class="widget-content-right">
+                                <div class="widget-numbers text-white">
+                                    <span id="luotGD"><%= tongGiaoDich %></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col border-top-0 border-right-0 border-bottom-0 border-primary card mb-3 ml-3 w-	75 mr-3 bg-grow-early widget-content">
+                            <div class="widget-content-left">
+                                <div class="widget-heading text-white" >User Chưa được xét duyệt</div>
+                                <div class="widget-subheading text-white" >Thống Kê Mới Nhất</div>
+                            </div>
+                            <div class="widget-content-right">
+                                <div class="widget-numbers text-white">
+                                    <span id="tongUserNotActive"><%= tongUserChuaDuyet %></span>
+                                </div>
+                            </div>
+                        </div>		
+                     </div>
+                     
+                   
+                             <div class="ml-2">
+                                 <div class="widget-heading">Top Người Dùng</div>
+                                 <div>
+                                  <% if(userInActive.length != 0){ %> 
+                                     <table class="table table-bordered">
+                                      <thead>
+                                        <tr>
+                                              <th scope="col">STT</th>
+                                              <th scope="col">Username</th>
+                                              <th scope="col">Email</th>
+                                              <th scope="col">Tên Đầy Đủ</th>
+                                              <th scope="col">Trạng Thái</th> <!-- đang chờ xét duyệt(token) , thành viên(role) ,  admin (role), bị khóa(isLocked) -->
+                                              <th scope="col" colspan="3">Thao tác</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                       
+                                          
+                                          <% userInActive.forEach(function(user, index){ %>
+                                             <tr>
+                                            <th scope="row"><%= index %></th>
+                                            <td>
+                                              <%= user.Username %>
+                                            </td>
+                                            <td>
+                                              <%= user.email %>
+                                            </td>
+                                            <td>
+                                              <%= user.fullname %>
+                                            </td>
+                                            <td>
+                                                <% if(user.role == 1){ %>
+                                                <b class="text-primary">ADMIN</b>
+                                                <% } else { %>
+                                                Thành Viên
+                                                <% }  %>
+                                            </td>
+                                            <td>
+                                              <form action="/admin/nguoidung/locked" method="post">
+                                                <input type="hidden" name="id" value="<%=user.id%>">
+                                                <button class="btn btn-outline-danger btn-sm">Khóa</button>
+                                            </form>
+        
+                                            <form action="/admin/nguoidung/edit" method="post">
+                                                <input type="hidden" name="id" value="<%=user.id%>">
+                                                <button class="btn btn-outline-success btn-sm">Sửa</button>
+                                            </form>               
+                                            </td>
+                                            <td>
+                                              <a class="btn btn-outline-primary btn-sm" href="/admin/nguoi-dung/xem-them/<%=user.id%>">Xem Thêm...</a>
+                                            </td>
+                                          </tr> 
+                                          <% }); %> 
+
+                                          <% } else { %>
+                                            <p>Hiện Tại DLLN Bank Không Có Khách Hàng Mới</p>
+                                          <% } %> 
+                                       
+                                      </tbody>
+                                    </table>
+                                    
+                                    
+                                 </div>
+                             </div>
+                     </div>
+
+
+                    
+                             <div class="ml-2 mt-3">
+                                 <div class="widget-heading">Người dùng chờ xét duyệt</div>
+                                 <div>
+                                  <% if(userNotActive.length != 0){ %> 
+                                     <table class="table table-bordered">
+                                      <thead>
+                                        <tr>
+                                              <th scope="col">STT</th>
+                                              <th scope="col">Username</th>
+                                              <th scope="col">Ảnh CMND Mặt trước</th>
+                                              <th scope="col">Ảnh CMND Mặt Sau</th>
+                                              <th scope="col">Số CMND</th>
+                                              <th scope="col">Ngày Cấp</th>
+                                              <th scope="col">Nơi Cấp</th>
+                                              <th scope="col" colspan="3">Thao tác</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                            <!-- <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>
+                                              <img src="/HinhMatSau-2.jpg">
+                                            </td>
+                                            <td>Anh 2</td>
+                                            <td>123445</td>
+                                            <td>12/06/2020</td>
+                                            <td>AK</td>
+                                            <td>
+                                              <button type="button" class="btn btn-outline-primary btn-sm">Đồng Ý</button>
+                                              <button type="button" class="btn btn-outline-danger btn-sm">Hủy Bỏ</button>                  
+                                            </td>
+                                            <td>
+                                              <a class="btn btn-outline-primary btn-sm" href="#">Xem Thêm...</a>
+                                            </td> -->
+                                            
+                                              <% userNotActive.forEach(function(user, index){ %>
+                                                  <tr>
+                                                      <th scope="row"><%= index %></th>
+                                                      <td>
+                                                          <%= user.Username %>
+                                                      </td>
+                                                      <td>
+                                                        <img style="width: 250;" src='/<%= user.HinhMatTruoc %>'>
+                                                      </td>
+                                                      <td>
+                                                        <img style="width: 250;" src='/<%= user.HinhMatSau %>'>
+                                                      </td>
+                                                      <td>
+                                                        <%= user.IDCard %> 
+                                                      </td>
+                                                      <td>
+                                                        <%= format_date(user.ngaycap)  %> 
+                                                      </td>
+                                                      <td>
+                                                        <%= user.noicap %>
+                                                      </td>
+                                                      <td>
+                                                        <form action="/admin/accept" method="post">
+                                                          <input type="hidden" name="id" value="<%=user.id%>">
+                                                          <button class="btn btn-outline-primary btn-sm">Đồng Ý</button>
+                                                        </form>
+
+                                                        <form action="/admin/decline" method="post">
+                                                          <input type="hidden" name="id" value="<%=user.id%>">
+                                                          <button class="btn btn-outline-danger btn-sm">Hủy Bỏ</button>
+                                                        </form>
+                                                      </td>
+                                                     
+                                                  </tr>    
+                                              <% }); %>
+                                          <% } else{ %>
+                                              <p>Hiện Tại DLLN Bank Không Có Khách Hàng Mới</p>
+                                          <% } %>
+                                        </tr>
+                                      
+                                      </tbody>
+                                    </table>
+                                 </div>
+                             </div>
+                    
+
+               
+
+            </div>
+        </div>
+	</body>
+  <script>
+    
+    function animateValue(id, start, end, duration) {
+      var range = end - start;
+      var current = start;
+      var increment = end > start? 1 : -1;
+      var stepTime = Math.abs(Math.floor(duration / range));
+      var obj = document.getElementById(id);
+      var timer = setInterval(function() {
+          current += increment;
+          obj.innerHTML = current;
+          if (current == end) {
+              clearInterval(timer);
+          }
+      }, stepTime);
+  }
+
+    let step = 1000;
+    let tongUser = Number(document.getElementById("tongUser").textContent);
+    let luotGD = Number(document.getElementById("luotGD").textContent); 
+    let tongUserNotActive = Number(document.getElementById("tongUserNotActive").textContent); 
+
+    if(tongUser != 0){
+      animateValue("tongUser", 0 , tongUser, step);
+    }
+
+    if(luotGD != 0){
+      animateValue("luotGD", 0 , luotGD, step);
+    }
+
+    if(tongUserNotActive != 0){
+      animateValue("tongUserNotActive", 0 , tongUserNotActive, step);
+    }
+
+  </script>
+  </html>
+
