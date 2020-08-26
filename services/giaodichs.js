@@ -1,17 +1,18 @@
-const Sequelize = require('sequelize');
+﻿const Sequelize = require('sequelize');
 const Model = Sequelize.Model;
 const db = require('./db');
 const support_ = require('./support_');
 
 class GiaoDich extends Model {
+   //tim giao dich bang ma giao dich
     static async findGiaoDichByID(id) {
         return GiaoDich.findByPk(id);
     }
-
+    //tim toan bo ma giao dich
     static async findAllGiaoDich(){
         return GiaoDich.findAll();
     }
-
+    //tim giao dich bang so tai khoan
     static async findGiaoDichBySTK(SoTaiKhoan){
         return GiaoDich.findAll({
             where:{
@@ -32,6 +33,7 @@ class GiaoDich extends Model {
             DonViTienTe
         });
     }
+    
     static async countLuotGD(){
        return GiaoDich.count({
         
