@@ -3,7 +3,8 @@ const nodemailer = require('nodemailer');
 //emal: 029.web2.17ck1@gmail.com
 const EMAIL = process.env.USER_EMAIL || '029.web2.17ck1@gmail.com';
 const PASSWORD = process.env.USER_PASSWORD || '\\Ny4Z<hQyqW^&fpR'; 
-
+//mail trong nodejs
+//nho accept mail tai duong dan
 async function send(to , subject, content){
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
