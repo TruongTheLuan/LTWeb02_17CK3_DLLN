@@ -1,0 +1,56 @@
+<%- include('templates/header'); -%>
+<section class="page-top-section set-bg" data-setbg="img/page-top-bg/4.jpg">
+    <div class="container">
+        <h2>About Me</h2>
+        <nav class="site-breadcrumb">
+            <a class="sb-item" href="/">Home</a>
+            <span class="sb-item active">Transfer</span>
+        </nav>
+    </div>
+</section>
+
+<section class="contact-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="list-group">
+                    <a href="/aboutMe" class="list-group-item list-group-item-action">Thông Tin Cơ Bản</a>
+                    <a href="/savings" class="list-group-item list-group-item-action">Tài Khoản Tiết Kiệm</a>
+                    <a href="/internal" class="list-group-item list-group-item-action">Chuyển Tiền Nội Bộ</a>
+                    <a href="/transfer" class="list-group-item list-group-item-action active">Chuyển Tiền Liên Ngân Hàng</a>
+                    <a href="/history" class="list-group-item list-group-item-action">Lịch Sử</a>
+                    <!-- <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="false">Vestibulum at eros</a> -->
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <form class="contact-form" style="padding-top: 0px;">
+                    <div><h2 style="padding-bottom: 50px;">Transfer</h2></div>
+                    <div class="form-group">
+                        <label for="indentifyCard">Số tài khoản</label>
+                        <input type="text" readonly class="form-control" id="indentifyCard">
+                    </div>
+                    <div class="form-group"><!--dropdown-->
+                        <label for="indentifyCard">Mã ngân hàng</label>
+                        <input type="text" readonly class="form-control" id="indentifyCard">
+                    </div>
+                    <div class="form-group">
+                        <label for="indentifyCard">Số tài khoản đích</label>
+                        <input type="text" class="form-control" id="indentifyCard">
+                    </div>
+                    <div class="form-group">
+                        <label for="indentifyCard">Số tiền gửi</label>
+                        <input type="number"  class="form-control" id="indentifyCard">
+                    </div>
+                    <div class="form-group">
+                        <label for="indentifyCard">Ghi chú</label>
+                        <textarea></textarea>
+                    </div>
+                    <button type="button" class="btn btn-primary">Chấp nhận</button>
+                    <button type="button" class="btn btn-danger">Từ chối</button>
+                </form>   
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('templates/footer'); -%>
