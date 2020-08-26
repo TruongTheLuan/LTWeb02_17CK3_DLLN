@@ -1,4 +1,4 @@
-const { Router } = require('express');
+﻿const { Router } = require('express');
 const asyncHandler = require('express-async-handler');
 const user = require('../services/users');
 const Email = require('../services/mail')
@@ -7,10 +7,11 @@ const BASE_URL = process.env.BASE_URL || 'http://localhost:3000'
 
 
 var router = new Router();
+//hien thi trang login
 router.get('/', (req, res)=>{
     res.render('login');
 });
-
+//xu li login
 router.post('/',  asyncHandler( async(req, res)=>{
     let info = req.body.info;
     var user_login = await user.findUserByUsername(info);
@@ -34,7 +35,7 @@ router.post('/',  asyncHandler( async(req, res)=>{
        return res.redirect('/');
     } 
 }));
-
+//quen mat khau
 router.get('/forgot-password', (req,res)=>{
     res.render('forgotPassword',{error : ""} );
 });
@@ -60,6 +61,7 @@ router.post('/forgot-password',asyncHandler( async(req, res)=>{
     return res.redirect("/login");
 }));
 
+
 router.get("/forgot-password/:id/:token",asyncHandler(async(req, res)=>{
     const {id , token} = req.params;
     
@@ -71,6 +73,7 @@ router.get("/forgot-password/:id/:token",asyncHandler(async(req, res)=>{
         return res.redirect('/404.html'); 
     }
 }));
+
 
 
 module.exports = router;
