@@ -32,15 +32,21 @@ app.use('/sign-in', require('./routes/signup'));
 app.use('/login', require('./routes/login'));
 //file contact
 app.use('/contact', require('./routes/contact'));
-
+//loc tai khoan chua login
 app.use(require('./middleware/auth'));
-
+//about me
 app.use('/aboutMe', require('./routes/aboutMe'));
+//tai khoan tiet kiem
 app.use('/savings', require('./routes/savings'));
+//tai khoan thanh toan
 app.use('/internal', require('./routes/internal'));
+//chuyen tien
 app.use('/transfer', require('./routes/transfer'));
+//lich su giao dich
 app.use('/history', require('./routes/history'));
+//log out
 app.get('/logout',require('./routes/logout'));
+//thong tin ca nhan
 app.use('/account', require('./routes/account'));
 
 //admin router
