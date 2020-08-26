@@ -1,5 +1,7 @@
+//yeu cau multer
 const multer = require('multer');
 
+//dinh dang du lieu
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
       if(file.mimetype == 'audio/mp3'){
@@ -16,7 +18,7 @@ var storage = multer.diskStorage({
       cb(null, file.originalname);
     }
 });
-
+//gan dinh dang du lieu
 const upload = multer({ storage: storage });
 
 module.exports = upload;
