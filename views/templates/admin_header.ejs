@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	
+	<body>
+			 <nav id="sidebar"  >
+            <div class="sidebar-header">
+                <h3>Admin Dashboard</h3>
+            </div>
+            <ul class="list-unstyled components">
+                <p>Thanh Quản Lí</p>
+                <li class="active">
+                    <a href="/admin/index">Home</a>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Quản Lí Chung</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="/admin/nguoi-dung">Quản Lí Người Dùng</a>
+                        </li>
+                        <li>
+                            <a href="#pageProduct" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Quản Lí Tài Khoản</a>
+	                            <ul class="collapse list-unstyled ml-3" id="pageProduct" >
+									  <li> 
+									  		<a href="/admin/account/tai-khoan-thanh-toan">Tài Khoản Thanh Toán</a>
+									  </li>
+									  <li>
+				                            <a href="/admin/account/tai-khoan-tiet-kiem">Tài Khoản Tiết Kiệm</a>
+				                       </li>
+									  <li>
+									  		<a href="/admin/account/giao-dich">Xem Giao Dịch</a>	
+									  </li>						  
+								</ul>
+                        	</li>
+                        
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Liên Hệ</a>
+                </li>
+                <li>
+                    <a href="/admin/cau-hinh">Cấu Hình</a>
+                </li>
+            </ul>
+        </nav>
+	</body>
+</html>

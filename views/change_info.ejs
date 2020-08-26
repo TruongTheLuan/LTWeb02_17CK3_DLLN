@@ -1,0 +1,144 @@
+<%- include('templates/header'); -%>
+    <!-- <section class="hero-section" style="background: url('/img/hero-slider/1.jpg');">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6" style="margin-top: 100px">
+                    <form class="hero-form" action="/sign-in/change-password" method="POST">
+                        <input type="hidden" value="" name="id" />
+                        <input type="password" placeholder="Password mới" name="password">
+                        <button class="site-btn">Thay đổi password</button>
+                        <div>
+                            <div class="form-group">
+                                <label for="">Mặt Trước CMND</label>
+                                <input type="file" class="form-control-file">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Mặt Sau CMND</label>
+                                <input type="file" class="form-control-file">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Số CMND</label>
+                            <input type="text" placeholder="Số Chứng Minh Nhân Dân">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hs-text">
+                        <h2>Vui Lòng Thay Đổi Password</h2>
+                        <p>
+                            tips: hãy dùng tài khoản của bạn để đăng nhập, vui lòng không chia sẻ
+                            mật khẩu và thông tin đăng nhập với người khác
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+<!-- Hero Section end -->
+
+
+<section class="contact-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="list-group">
+                    <h2>HINT</h2>
+                    <p class="mt-5">
+                        sử dụng PASSWORD dễ nhớ và CMND của bạn, 
+                        những thông tin như mật khẩu hoặc chứng minh nd không nên để lộ cho người khác
+                        <p class="text-danger">
+                            <b>Bạn Có thể phải chờ ít nhất 14 ngày để kích hoạt tài khoản của mình </b>
+                        </p>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <form class="contact-form" action="/sign-in/change-info" style="padding-top: 0px;" method="POST" enctype="multipart/form-data">
+                    <div><h2 style="padding-bottom: 50px;">Thông Tin Cá Nhân</h2></div>
+                    
+                    <input type="hidden" value="<%=id%>" name="id" />
+                    <div class="form-group">
+                        <label for="password">Mật khẩu mới</label>
+                        <input type="password" name="password" class="form-control">
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label>Tên Đầy đủ</label>
+                            <input type="text" name="fullname" class="form-control">
+                        </div>
+                        <div class="col">
+                            <label>Ngày Sinh</label>
+                            <input type="date" name="ngaysinh" class="form-control">
+                        </div>
+                    </div>
+
+                    <fieldset class="form-group">
+                        <div class="row">
+                          <legend class="col-form-label col-sm-2 pt-0">Giới Tính</legend>
+                          <div class="col-sm-10">
+
+                            <div class="form-check">
+                              <input class="form-check-input" style="width: inherit; height: inherit;" type="radio" name="sex" value="1" checked>
+                              <label class="form-check-label">
+                                Nam 
+                              </label>
+                            </div>
+
+                            <div class="form-check">
+                              <input class="form-check-input" style="width: inherit; height: inherit;" type="radio" name="sex" value="0">
+                              <label class="form-check-label">
+                               Nữ
+                              </label>
+                            </div>
+                            
+                          </div>
+                        </div>
+                    </fieldset>
+                    
+                    <h3 class="mb-5">CMND hoặc Thẻ Căn Cước</h3>
+                    <div class="row">
+                        <div class="col">
+                            <label>Mặt trước CMND</label>
+                            <input class="input-upload-file" style="background: inherit" type="file" name="hinhMatTruoc">
+                        </div>
+                        <div class="col">
+                            <label>Mặt Sau CMND</label>
+                            <input class="input-upload-file" name="hinhMatSau" style="background: inherit" type="file">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="indentifyCard">Số CMND /Thẻ căn cước</label>
+                        <input type="text"  class="form-control" name="cmnd">
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label>Ngày Cấp</label>
+                            <input type="date" class="form-control" id="fullName" name="ngaycap">
+                        </div>
+                        <div class="col">
+                            <label>Nơi Cấp</label>
+                            <input type="text" class="form-control" name="noicap">
+                        </div>
+                    </div>
+                     
+                    <p class="text-danger">
+                        <b>
+                            <% if(errors != "") { %> 
+                                &#9888; <%= errors %>
+                            <% } %>
+                        </b>
+                    </p>
+
+                    <button  class="btn btn-primary">Cập Nhật Thông Tin</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<%- include('templates/footer'); -%>
