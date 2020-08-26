@@ -24,9 +24,13 @@ app.use(bodyParser.json());
 //phan middleware
 app.use(require('./middleware/init'));
 //Router
+//file index
 app.use('/',require('./routes/index'));
+//file sign up
 app.use('/sign-in', require('./routes/signup'));
+//file login
 app.use('/login', require('./routes/login'));
+//file contact
 app.use('/contact', require('./routes/contact'));
 
 app.use(require('./middleware/auth'));
