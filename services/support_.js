@@ -19,7 +19,7 @@ class Support{
         return TenHinhThuc;
     }
 
-
+    //ten cac loai tai khoan theo ma tai khoan
     static getTenLoaiTaiKhoan(MaLoaiTaiKhoan){
         let TenLoaiTaiKhoan = "";
         switch (MaLoaiTaiKhoan) {
