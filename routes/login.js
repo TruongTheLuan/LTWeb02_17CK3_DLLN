@@ -60,8 +60,7 @@ router.post('/forgot-password',asyncHandler( async(req, res)=>{
     //chuyen den login
     return res.redirect("/login");
 }));
-
-
+//xu li quen mat khau
 router.get("/forgot-password/:id/:token",asyncHandler(async(req, res)=>{
     const {id , token} = req.params;
     
@@ -73,7 +72,5 @@ router.get("/forgot-password/:id/:token",asyncHandler(async(req, res)=>{
         return res.redirect('/404.html'); 
     }
 }));
-
-
 
 module.exports = router;
