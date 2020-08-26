@@ -1,4 +1,4 @@
-const { Router } = require('express');
+﻿const { Router } = require('express');
 const asyncHandler = require('express-async-handler');
 const user = require('../services/users');
 
@@ -7,11 +7,11 @@ var router = new Router();
 router.get('/', (req, res)=>{
     res.render('index');
 });
-
+//trang checkout
 router.get('/checkout',(req,res)=>{
     res.render('notifications/checkout');
 });
-
+//trang 404
 router.get('/404.html',(req,res)=>{
     res.render('notifications/404');
 });
