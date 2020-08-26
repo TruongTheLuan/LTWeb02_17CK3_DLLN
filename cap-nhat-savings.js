@@ -1,4 +1,4 @@
-const db = require('./services/db');
+﻿const db = require('./services/db');
 const CronJob = require('cron').CronJob;
 
 const CRON_PATTERN =   process.env.CRON_PATTERN || '0 0 12 1 * *';  //Every month on the 1st, at noon   
@@ -7,16 +7,7 @@ const taikhoantietkiems = require('./services/taikhoantietkiems');
 
 db.sync().then(async () => { 
     var job = new CronJob(CRON_PATTERN, async function() {
-        //kiểm tra hình thức
-        //if hình thức != 4
-            //giảm kì hạn
-            //tính lãi
-            //thêm vào tiền lời
-        
-        //if hình thức == 4
-            //tính lãi
-            //thêm vào tiền lời
-
+       
         //tìm tất cả tài khoản
         let accounts = await taikhoantietkiems.findAllNotLocked();
         if(accounts.length != 0) {
