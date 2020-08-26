@@ -7,7 +7,7 @@ const taikhoantietkiems = require('./services/taikhoantietkiems');
 
 db.sync().then(async () => { 
     var job = new CronJob(CRON_PATTERN, async function() {
-       
+        //thuc hien tinh lai cho tat ca cac tai khoan dau moi thang   
         //tìm tất cả tài khoản
         let accounts = await taikhoantietkiems.findAllNotLocked();
         if(accounts.length != 0) {
