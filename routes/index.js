@@ -15,11 +15,11 @@ router.get('/checkout',(req,res)=>{
 router.get('/404.html',(req,res)=>{
     res.render('notifications/404');
 });
-
+//trang 503
 router.get('/503.html',(req, res)=>{
     res.render('notifications/503');
 });
-
+//thay password
 router.post('/change-password',asyncHandler(async(req,res)=>{
     let _user = await user.updatePassword(req.body.id, req.body.password);
 
