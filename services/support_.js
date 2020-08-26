@@ -1,3 +1,4 @@
+﻿//luu cac loai ma hinh thuc de tien su dung
 class Support{
     static getTenHinhThuc(MaHinhThuc){
         let TenHinhThuc = "";
