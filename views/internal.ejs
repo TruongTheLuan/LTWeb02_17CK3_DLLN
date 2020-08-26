@@ -1,0 +1,166 @@
+<%- include('templates/header'); -%>
+<section class="page-top-section set-bg" data-setbg="img/page-top-bg/4.jpg">
+    <div class="container">
+        <h2>About Me</h2>
+        <nav class="site-breadcrumb">
+            <a class="sb-item" href="/">Home</a>
+            <span class="sb-item active">Internal</span>
+        </nav>
+    </div>
+</section>
+
+<section class="contact-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="list-group">
+                    <a href="/aboutMe" class="list-group-item list-group-item-action">Thông Tin Cơ Bản</a>
+                    <a href="/savings" class="list-group-item list-group-item-action">Tài Khoản Tiết Kiệm</a>
+                    <a href="/internal" class="list-group-item list-group-item-action active">Chuyển Tiền Nội Bộ</a>
+                    <a href="/transfer" class="list-group-item list-group-item-action">Chuyển Tiền Liên Ngân Hàng</a>
+                    <a href="/history" class="list-group-item list-group-item-action">Lịch Sử</a>
+                    <!-- <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="false">Vestibulum at eros</a> -->
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <form action="/internal" method="POST" class="contact-form" style="padding-top: 0px;">
+                    <div>
+                        <h2 style="padding-bottom: 50px;">Phương Thức Chuyển tiền nội bộ</h2>
+                    </div>
+                    <!-- STK và tên của người gửi -->
+                    <div class="form-group">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label for="formAccount">Số tài khoản người gửi</label>
+                                </div>
+                                <div class="col-lg-9">
+                                    <input type="text" name="sotaikhoannguoigui" readonly class="form-control" value="<%= currAccount.STK %>" id="formAccount">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label for="formFullName">Họ tên người gửi</label>
+                                </div>
+                                <div class="col-lg-9">
+                                    <input type="text" name="hotennguoigui" readonly class="form-control" value="<%= currAccount.fullname %>" id="formFullName">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- STK và tên của người nhận -->
+                    <div class="form-group">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label for="desAccount">Số Tài Khoản người nhận</label>
+                                </div>
+                                <div class="col-lg-9">
+                                    <input type="text" name="sotaikhoannguoinhan" class="form-control" id="desAccount">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label for="desFullName">Họ tên người nhận</label>
+                                </div>
+                                <div class="col-lg-9">
+                                    <input type="text" name="hotennguoinhan" readonly class="form-control" id="desFullName">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label for="SavingsMoney">Số Tiền: </label>
+                                </div>
+                                <div class="col-lg-9">
+                                    <input type="number" name="sotien" class="form-control" id="SavingsMoney">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="container">
+
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label for="Note">Đơn Vị </label>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="form-check ml-2">
+                                        <input class="form-check-input" type="radio" name="donvi"
+                                             value="VND" checked
+                                            style="width:inherit; height: inherit;">
+                                        <label class="form-check-label" >
+                                            VND
+                                        </label>
+                                    </div>
+                                    <div class="form-check ml-2">
+                                        <input class="form-check-input" type="radio" name="donvi"
+                                             value="USD" checked
+                                            style="width:inherit; height: inherit;">
+                                        <label class="form-check-label" >
+                                            USD
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="container">
+
+                            <div class="row">
+                                <div class="col-lg-3 mt-3">
+                                    <label for="Note">Nội Dung </label>
+                                </div>
+                                <div class="col-lg-9 mt-3">
+                                    <textarea class="form-control" name="noidung"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary">Savings</button>
+                <button  class="btn btn-danger">Cancel</button>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $('#desAccount').on('change', function() {
+        $.ajax({
+            url : "/internal/tim-ten",
+            type : "post",
+            dataType:"json",
+            data : {
+                 STK : 
+                 $('#desAccount').val()
+
+            },success: function(data) {
+                //console.log('success');
+                //console.log(JSON.stringify(data));
+                const json = JSON.stringify(data).replace(/['"]+/g, '');
+                $("#desFullName").val(json);
+            }, error  : function() { console.log('error');}
+        });
+    });
+    
+</script>
+
+
+<%- include('templates/footer'); -%>
