@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+﻿const Sequelize = require('sequelize');
 const Model = Sequelize.Model;
 const db = require('./db');
     // Quản lý các tài khoản:
@@ -68,7 +68,7 @@ class TaiKhoanThanhToan extends Model {
             }
         });
     }
-
+    //tìm toàn bộ account theo mã khách hàng
     static async findAllAccountForKH(MaKhachHang){
         return TaiKhoanThanhToan.findAll({
             where: {
@@ -76,7 +76,7 @@ class TaiKhoanThanhToan extends Model {
             }
         })
     }
-
+    //tìm toàn bộ account không bị khóa
     static async findAllAccountNotLockedForKH(MaKhachHang){
         return TaiKhoanThanhToan.findAll({
             where :{
@@ -85,6 +85,7 @@ class TaiKhoanThanhToan extends Model {
             }
         })
     }
+    //tìm account bằng mã khách hàng
     static async findAccountByMaKhachHang(MaKhachHang){
         return TaiKhoanThanhToan.findOne({
             where :{
