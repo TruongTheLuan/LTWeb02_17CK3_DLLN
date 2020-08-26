@@ -1,0 +1,52 @@
+<%- include('templates/header'); -%>
+<section class="page-top-section set-bg" data-setbg="img/page-top-bg/4.jpg">
+    <div class="container">
+        <h2>About Me</h2>
+        <nav class="site-breadcrumb">
+            <a class="sb-item" href="/">Home</a>
+            <span class="sb-item active">My Profile</span>
+        </nav>
+    </div>
+</section>
+
+<section class="contact-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="list-group">
+                    <a href="/aboutMe" class="list-group-item list-group-item-action active" aria-disabled="true">Thông Tin Cơ Bản</a>
+                    <a href="/savings" class="list-group-item list-group-item-action" aria-disabled="true">Tài Khoản Tiết Kiệm</a>
+                    <a href="/internal" class="list-group-item list-group-item-action" aria-disabled="true">Chuyển Tiền Nội Bộ</a>
+                    <a href="/transfer" class="list-group-item list-group-item-action" aria-disabled="true">Chuyển Tiền Liên Ngân Hàng</a>
+                    <a href="/history" class="list-group-item list-group-item-action" aria-disabled="true">Lịch Sử</a>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <form class="contact-form" action="/aboutMe" method="POST" style="padding-top: 0px;">
+                    <div><h2 style="padding-bottom: 50px;">Thông Tin Cơ Bản</h2></div>
+                    <input type="hidden" name="id" value="<%= user.id %>">
+                    <div class="form-group">
+                        <label for="fullName">Họ Và Tên</label>
+                        <input type="text" class="form-control" id="fullName" name="fullname" value="<%= user.fullname %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="accountNumber">Số Tài Khoản</label>
+                        <input type="text" readonly class="form-control" id="accountNumber" value="<%= user.STK %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="indentifyCard">Chứng Minh Nhân Dân</label>
+                        <input type="text" readonly class="form-control" id="indentifyCard" value="<%= user.IDCard %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" readonly class="form-control" id="email" value="<%= user.email %>">
+                    </div>
+                    <button class="btn btn-primary">Cập Nhật Thông Tin</button>
+                    <a href="/aboutMe/change-password/<%=user.id%>">Thay đổi password</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('templates/footer'); -%>
