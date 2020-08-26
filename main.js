@@ -21,7 +21,7 @@ app.use(express.static(__dirname + '/uploads'))
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+//phan middleware
 app.use(require('./middleware/init'));
 //Router
 app.use('/',require('./routes/index'));
