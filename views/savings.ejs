@@ -1,0 +1,166 @@
+<%- include('templates/header'); -%>
+<section class="page-top-section set-bg" data-setbg="img/page-top-bg/4.jpg">
+    <div class="container">
+        <h2>About Me</h2>
+        <nav class="site-breadcrumb">
+            <a class="sb-item" href="/">Home</a>
+            <span class="sb-item active">Savings</span>
+        </nav>
+    </div>
+</section>
+
+<section class="contact-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="list-group">
+                    <a href="/aboutMe" class="list-group-item list-group-item-action">Thông Tin Cơ Bản</a>
+                    <a href="/savings" class="list-group-item list-group-item-action active">Tài Khoản Tiết Kiệm</a>
+                    <a href="/internal" class="list-group-item list-group-item-action">Chuyển Tiền Nội Bộ</a>
+                    <a href="/transfer" class="list-group-item list-group-item-action">Chuyển Tiền Liên Ngân Hàng</a>
+                    <a href="/history" class="list-group-item list-group-item-action">Lịch Sử</a>
+                   
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <form class="contact-form" style="padding-top: 0px;" method="POST">
+                    <div>
+                        <h2 style="padding-bottom: 50px;">Tài khoản tiết kiệm</h2>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-lg-3">
+                                <p>Hình Thức</p>
+                            </div>
+                            <div class="col-lg-9">
+                                <select class="custom-select" id="hinhthuc" name="hinhthuc">
+                                    <option selected>--- Chọn Hình Thức ---- </option>
+                                    <option value="1">HT1: Gửi Tiết Kiệm Có Kì Hạn - Dùng Vốn Và Lời Để Đáo Hạn</option>
+                                    <option value="2">HT2: Gửi Tiết Kiệm có Kì Hạn - Rút Lời Về Tài Khoản Chính Gửi Tiếp Vốn</option>
+                                    <option value="3">HT3: Rút Cả Vốn Lẫn lời về tài khoản </option>
+                                    <option value="4">HT4: Gửi Tiết Kiệm Không Kì Hạn </option>
+                                  </select>
+                            </div>
+                            
+                            <div class="col-lg-3 mt-5">
+                                <p>Chọn Kì Hạn</p>
+                            </div>
+                            <div class="col-lg-9 mt-5">
+                                <div class="form-check ml-2">
+                                    <input class="form-check-input" type="radio" name="kihan"
+                                         value="1" checked
+                                        style="width:inherit; height: inherit;">
+                                    <label class="form-check-label" >
+                                        1 tháng
+                                    </label>
+                                </div>
+                                <div class="form-check ml-2">
+                                    <input class="form-check-input" type="radio" name="kihan"
+                                        value="3" style="width:inherit; height: inherit;">
+                                    <label class="form-check-label" >
+                                        3 tháng
+                                    </label>
+                                </div>
+                                <div class="form-check ml-2">
+                                    <input class="form-check-input" type="radio" name="kihan"
+                                         value="6" style="width:inherit; height: inherit;">
+                                    <label class="form-check-label" >
+                                        6 tháng
+                                    </label>
+                                </div>
+                                <div class="form-check ml-2">
+                                    <input class="form-check-input" type="radio" name="kihan"
+                                        value="12" style="width:inherit; height: inherit;">
+                                    <label class="form-check-label" >
+                                        12 tháng
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                       
+
+
+                        <div class="form-group">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-3 mt-5">
+                                        <p style="margin-left: -18px;" for="SavingsMoney">Số Tiền: </p>
+                                    </div>
+                                    <div class="col-lg-9 mt-5">
+                                        <input type="number" class="form-control" name="money">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-3 mt-3">
+                                        <p style="margin-left: -18px;" >Đơn Vị: </p>
+                                    </div>
+                                    <div class="col-lg-9 mt-3">
+                                        <div class="form-check ml-2">
+                                            <input class="form-check-input" type="radio" name="donvi"
+                                                 value="VND" checked
+                                                style="width:inherit; height: inherit;">
+                                            <label class="form-check-label" >
+                                                VND
+                                            </label>
+                                        </div>
+                                        <div class="form-check ml-2">
+                                            <input class="form-check-input" type="radio" name="donvi"
+                                                 value="USD" checked
+                                                style="width:inherit; height: inherit;">
+                                            <label class="form-check-label" >
+                                                USD
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button  class="btn btn-primary">Gửi Tiết Kiệm</button>
+                    <button  class="btn btn-danger">Hủy</button>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<script>
+
+    function disableKiHan(isDisable){
+        var options = document.getElementsByName('kihan');
+            for(i = 0; i < options.length; i++)
+            {
+                var opt = options[i];
+                if(opt.type=="radio")
+                {              
+                    opt.disabled = isDisable;
+                }
+        }
+    }
+
+    $(document).ready(function(){
+       $('.dropdown-toggle').dropdown()
+       $('#hinhthuc').on('change', function() {
+        if(this.value == 4){
+            disableKiHan(true);
+        } else {
+            disableKiHan(false);
+        }
+      });
+   });
+   
+</script>
+
+<%- include('templates/footer'); -%>
