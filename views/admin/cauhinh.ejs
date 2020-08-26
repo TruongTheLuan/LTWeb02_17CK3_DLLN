@@ -1,0 +1,94 @@
+<html>
+	<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="/css/admin-styles.css" />
+		<link type="text/css" rel="stylesheet" href="/css/font-awesome.min.css" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="/js/jquery-3.2.1.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+    <script src="/js/admin-js.js"></script>
+        
+		<title>Admin Homepage - Trang Quản Lí DLLN Bank</title>
+	</head>
+	
+	<body>
+        <%  
+          function format_date(current_datetime){
+              return current_datetime.getDate() + "/" + (current_datetime.getMonth() + 1) + "/" + current_datetime.getFullYear();
+          }
+        %>
+        <div class="wrapper">
+            <!-- header -->
+            <%- include('../templates/admin_header'); -%>
+            <div id="content">
+                <!-- navbar -->
+                <%- include('../templates/admin_navbar'); -%>
+                <div class="row">
+                  <div class="col-lg-9">
+                    <form class="contact-form" action="/admin/cau-hinh" style="padding-top: 0px;" method="POST">
+                        <div>
+                            <h2 style="padding-bottom: 50px;">Cấu Hình Các Tham Số Quy Đinh </h2>
+                        </div>
+                        <div class="container">
+
+
+                            <div class="row">
+                                <div class="col-lg-3 mt-5">
+                                    <p>Lãi Suất Có Kì Hạn</p>
+                                </div>
+                                <div class="col-lg-9 mt-5 pr-4 pl-4">                  
+                                  <input type="number" class="form-control" name="cokihan" value="<%= thamso.LaiSuatCoKiHan %>">              
+                                </div>
+                            </div>
+    
+                            <div class="form-group">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-3 mt-5">
+                                            <p style="margin-left: -18px;">Ngày Hết Hạn Của Tài Khoản Tiết Kiệm: </p>
+                                        </div>
+                                        <div class="col-lg-9 mt-5">
+                                            <input type="number" class="form-control" name="ngayhethan" value="<%= thamso.NgayDong %>">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                             
+                            <div class="form-group">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-3 mt-5">
+                                            <p style="margin-left: -18px;">Không Có Kì Hạn: </p>
+                                        </div>
+                                        <div class="col-lg-9 mt-5">
+                                            <input type="number" class="form-control" name="khongkihan" value="<%= thamso.LaiSuatKhongCoKiHan %>">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="form-group">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-3 mt-5">
+                                            <p style="margin-left: -18px;">Tỉ Giá USD: </p>
+                                        </div>
+                                        <div class="col-lg-9 mt-5">
+                                            <input type="number" class="form-control" name="tigiausd" value="<%= thamso.TiGiaUSD %>">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                     
+
+                        <button  class="btn btn-primary">Thay Đổi Cấu Hình</button>
+                    </form>
+                    
+                  </div>
+                </div>
+            </div>
+        </div>
+	</body>
+</html>
