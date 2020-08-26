@@ -1,0 +1,107 @@
+<%- include('templates/header'); -%>
+    <section class="hero-section">
+        <div class="container">
+            <div class="row">
+                <% if(currentUser){ %>
+                    <div class="col-lg-6">
+                        <div class="hs-text">
+                            <h2>Hello ,  <%= currentUser.fullname %></h2>
+                            <p>
+                                Giờ đây bạn đã là thành viên chính thức của 
+                                DLLN Bank, Nơi uy tín nhất dành cho những người có nhu cầu lập tài khoản 
+                                Chuyển rút tiền, gởi tiền... , đội ngũ nhân viên của chúng tôi luôn sẵn sàng phục vụ bạn hết mình
+                            </p>
+                            
+                        </div>
+                    </div>
+                <% } else { %>
+                    <div class="col-lg-6">
+                        <div class="hs-text">
+                            <h2>Đăng Kí Ngay Hôm nay</h2>
+                            <p>
+                                Tham gia với chúng tôi ngay hôm nay để nhận được những quyền lơi tốt nhất cho khách hàng mới.
+                                Tìm hiểu thêm về chúng tôi qua link dưới đây
+                            </p>
+                            <a href="#" class="site-btn sb-dark">Find out more</a>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                        <form class="hero-form" action="/sign-in/checkout" method="POST">
+                            <input type="text" placeholder="Your Username" name="username">
+                            <input type="text" placeholder="Your E-mail" name="email">
+                            <p>
+                                Đăng kí vào link này có nghĩa bạn là thành viên chính thức của chúng tôi
+                                cũng như chấp nhận các điều khoản về chính sách người dùng của chúng tôi   
+                            </p>
+                            <button class="site-btn">Gia Nhập Ngay</button>
+                        </form>
+                    </div>
+                <% } %>  
+            </div>
+        </div>
+        <div class="hero-slider owl-carousel">
+            <div class="hs-item set-bg" data-setbg="img/hero-slider/1.jpg"></div>
+            <div class="hs-item set-bg" data-setbg="img/hero-slider/2.jpg"></div>
+            <div class="hs-item set-bg" data-setbg="img/hero-slider/3.jpg"></div>
+        </div>
+    </section>
+<!-- Hero Section end -->
+
+<!-- Why Section end -->
+<section class="why-section spad">
+    <div class="container">
+        <div class="text-center mb-5 pb-4">
+            <h2>Lợi Thế DLLN Bank</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="icon-box-item">
+                    <div class="ib-icon">
+                        <i class="flaticon-012-24-hours"></i>
+                    </div>
+                    <div class="ib-text">
+                        <h5>Đăng Kí Cực Nhanh, thủ tục đơn giản</h5>
+                        <p>
+                            đăng kí hoàn toàn thông qua các dịch vụ trực tuyến, 
+                            bạn có thể chỉ mất 12h - 24h để nhân viên hoàn tất các thủ tục liên quan
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="icon-box-item">
+                    <div class="ib-icon">
+                        <i class="flaticon-036-customer-service"></i>
+                    </div>
+                    <div class="ib-text">
+                        <h5>Nhân viên tư vấn ưu tú</h5>
+                        <p>
+                            Đến với chúng tôi bạn sẽ có 1 đội ngũ tư vấn viên nhiệt tình phục vụ bạn
+                            24/24 sẵn sàng giải đáp mọi điều khoản và hỗ trợ bạn trong mọi vấn để
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="icon-box-item">
+                    <div class="ib-icon">
+                        <i class="flaticon-039-info"></i>
+                    </div>
+                    <div class="ib-text">
+                        <h5>Thông tin giao dịch</h5>
+                        <p>
+                            Đến với chúng tôi bạn sẽ được giao dịch dưới mức phí cực thấp, được xem các giao dịch dù nhỏ nhất
+                            Bạn có thể giao dịch liên ngân hàng
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center pt-3">
+            <a href="#" class="site-btn sb-big">Apply Now!</a>
+        </div>
+    </div>
+</section>
+<!-- Why Section end -->
+<%- include('templates/footer'); -%>
