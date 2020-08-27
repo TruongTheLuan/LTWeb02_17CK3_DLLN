@@ -16,7 +16,7 @@
 </head>
 
 <body>
-  <%  
+      <%  
           function format_date(current_datetime){
               return current_datetime.getDate() + "/" + (current_datetime.getMonth() + 1) + "/" + current_datetime.getFullYear();
           }
@@ -79,21 +79,25 @@
 
 
                 <!-- NẾU TÀI KHOẢN KHÓA THÌ KHÓA CÒN NGƯỢC LẠI LÀ MỞ -->
-                <form action="/admin/account/tai-khoan-thanh-toan/lock" method="post">
+                <% if(taikhoan.isLocked){ %>
+                <form action="/admin/account/tai-khoan-thanh-toan/open" method="post">
                   <input type="hidden" name="stk" value="<%= taikhoan.SoTaiKhoan %>">
-                  <button class="btn btn-outline-danger btn-sm">Khóa Tài Khoản</button>
+                  <button class="btn btn-outline-success btn-sm">Mở Tài Khoản</button>
                 </form>
-
-                <form action="/admin/account/tai-khoan-thanh-toan/edit" method="post">
-                  <input type="hidden" name="stk" value="<%= taikhoan.SoTaiKhoan %>">
-                  <button class="btn btn-outline-success btn-sm">Cập Nhật Tài Khoản</button>
-                </form>
+                <% } else{ %>
+                  <form action="/admin/account/tai-khoan-thanh-toan/lock" method="post">
+                    <input type="hidden" name="stk" value="<%= taikhoan.SoTaiKhoan %>">
+                    <button class="btn btn-outline-danger btn-sm">Khóa Tài Khoản</button>
+                  </form>
+               <% } %> 
+               
+     
+                  <a class="btn btn-outline-success btn-sm" href="/admin/account/tai-khoan-thanh-toan/rut-tien/<%=taikhoan.SoTaiKhoan%>">Rút tiền</a>
+                
 
               </td>
                 </tr>
               <% }); %>
-
-            
           </tbody>
         </table>
         <% } else { %>

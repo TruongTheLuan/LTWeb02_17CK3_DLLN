@@ -23,6 +23,44 @@ router.post('/lock', asyncHandler(async (req, res) => {
     await taikhoanthanhtoans.lockedAccount(req.body.stk);
     res.redirect('back');
 }));
+
+router.post('/open', asyncHandler(async (req, res) => {
+    await taikhoanthanhtoans.unlockedAccount(req.body.stk);
+    res.redirect('back');
+}));
+
+router.get('/rut-tien/:sotaikhoan', asyncHandler(async (req, res) => {
+
+    let curr = req.session.user || req.cookies['user'];
+    res.render('admin/taikhoanthanhtoan_edit', {
+        currentUser: curr,
+        sotaikhoan: req.params.sotaikhoan,
+        errors: ""
+    });
+}));
+
+router.post('/rut-tien', asyncHandler(async (req, res) => {
+    
+    
+    let account_thanhtoan = await taikhoanthanhtoans.findAccountBySoTaiKhoan(req.body.sotaikhoan);
+
+    let money = req.body.money;
+    //chuyển đổi tỉ giá
+    if (req.body.donvi != account_thanhtoan.DonViTienTe) {
+        //cập nhật hình thức, kì hạn, số tiền
+        //donvi = USD => account = VND
+        if (req.body.donvi == "USD") {
+            money = money * thamso[0].TiGiaUSD;
+        } else {
+            money = money / thamso[0].TiGiaUSD;
+        }
+    }
+    await taikhoanthanhtoans.rutTienTuTaiKhoan(req.body.sotaikhoan, account_thanhtoan.SoDu - money);
+    res.redirect('/admin/account/tai-khoan-thanh-toan');
+}));
+
+
+
 //add 
 router.get('/them-moi', (req, res) => {
     let curr = req.session.user || req.cookies['user'];

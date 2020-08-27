@@ -103,15 +103,17 @@
                                                 <% }  %>
                                             </td>
                                             <td>
-                                              <form action="/admin/nguoidung/locked" method="post">
-                                                <input type="hidden" name="id" value="<%=user.id%>">
-                                                <button class="btn btn-outline-danger btn-sm">Khóa</button>
-                                            </form>
-        
-                                            <form action="/admin/nguoidung/edit" method="post">
-                                                <input type="hidden" name="id" value="<%=user.id%>">
-                                                <button class="btn btn-outline-success btn-sm">Sửa</button>
-                                            </form>               
+                                              <% if(user.isLocked){ %>
+                                                <form action="/admin/nguoidung/open" method="post">
+                                                    <input type="hidden" name="id" value="<%=user.id%>">
+                                                    <button class="btn btn-outline-success btn-sm">Mở</button>
+                                                </form>
+                                            <% } else{ %>
+                                                <form action="/admin/nguoidung/lock" method="post">
+                                                    <input type="hidden" name="id" value="<%=user.id%>">
+                                                    <button class="btn btn-outline-danger btn-sm">Khóa</button>
+                                                </form>
+                                            <%  } %>             
                                             </td>
                                             <td>
                                               <a class="btn btn-outline-primary btn-sm" href="/admin/nguoi-dung/xem-them/<%=user.id%>">Xem Thêm...</a>

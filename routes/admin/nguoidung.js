@@ -25,4 +25,15 @@ router.post('/tim-kiem',asyncHandler(async (req, res)=>{
     res.render('admin/nguoidung',{currentUser: curr, users : user});
 }));
 
+router.post('/open', asyncHandler(async (req, res) => {
+    await User.unLockedUser(req.body.id);
+    res.redirect('back');
+}));
+
+router.post('/lock', asyncHandler(async (req, res) => {
+    await User.LockedUser(req.body.id);
+    res.redirect('back');
+}));
+
+
 module.exports = router;
