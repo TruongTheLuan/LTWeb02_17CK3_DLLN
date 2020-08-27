@@ -12,8 +12,11 @@ class Support{
             case 3:
                 TenHinhThuc = "Rút Cả Vốn Lẫn lời về tài khoản";
                 break;
-            default:
-                TenHinhThuc = "Gửi Tiết Kiệm Không Kì Hạn"
+            case 4:
+                TenHinhThuc = "Gửi Tiết Kiệm Không Kì Hạn";
+                break;
+            case 5:
+                TenHinhThuc = "Đóng Tài Khoản Tiết Kiệm";
                 break;
         }
         return TenHinhThuc;

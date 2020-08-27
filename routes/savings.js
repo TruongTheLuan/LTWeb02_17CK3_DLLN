@@ -48,7 +48,7 @@ router.post('/', asyncHandler(async (req, res) => {
                     //HT1: Gửi Tiết Kiệm Có Kì Hạn - Dùng Vốn Và Lời Để Đáo Hạn - tích lãi vào tài khoản gốc
                     case 1:
                         await taikhoantietkiem.guiTietKiemHT1(currAccount.STK, req.body.kihan, money);
-                        await giaodich.add(currAccount.STK, money, 1, 5, tktk.NgayMo, account_thanhtoan.DonViTienTe);
+                        await giaodich.add(currAccount.STK, money, 1, 5, account_savings.NgayMo, account_thanhtoan.DonViTienTe);
 
                         break;
 
@@ -56,26 +56,33 @@ router.post('/', asyncHandler(async (req, res) => {
                     case 2:
                         //cộng lời vào tài khoản chính
                         await taikhoanthanhtoan.CongLai(currAccount.STK, account_savings.TienLaiToanBo);
-                        await giaodich.add(currAccount.STK, account_savings.TienLaiToanBo, 0, 0, tktk.NgayMo, account_thanhtoan.DonViTienTe);
+                        await giaodich.add(currAccount.STK, account_savings.TienLaiToanBo, 0, 0, account_savings.NgayMo, account_thanhtoan.DonViTienTe);
 
                         await taikhoantietkiem.guiTietKiemHT2(currAccount.STK, req.body.kihan, money);
-                        await giaodich.add(currAccount.STK, money, 1, 5, tktk.NgayMo, account_thanhtoan.DonViTienTe);
+                        await giaodich.add(currAccount.STK, money, 1, 5, account_savings.NgayMo, account_thanhtoan.DonViTienTe);
 
                         break;
                         //HT3: Rút Cả Vốn Lẫn lời về tài khoản - gửi bằng tiền mới
                     case 3:
                         await taikhoanthanhtoan.CongLai(currAccount.STK, (account_savings.TienLaiToanBo + account_savings.TienGuiVao));
-                        await giaodich.add(currAccount.STK, (account_savings.TienLaiToanBo + account_savings.TienGuiVao), 0, 0, tktk.NgayMo, account_thanhtoan.DonViTienTe);
+                        await giaodich.add(currAccount.STK, (account_savings.TienLaiToanBo + account_savings.TienGuiVao), 0, 0, account_savings.NgayMo, account_thanhtoan.DonViTienTe);
 
                         await taikhoantietkiem.guiTietKiemHT3(currAccount.STK, req.body.kihan, money);
-                        await giaodich.add(currAccount.STK, money, 1, 5, tktk.NgayMo, account_thanhtoan.DonViTienTe);
+                        await giaodich.add(currAccount.STK, money, 1, 5, account_savings.NgayMo, account_thanhtoan.DonViTienTe);
                         break;
                         //không kì hạn 
-                    default:
-
+                    case 4:
                         //giống th1
                         await taikhoantietkiem.guiTietKiemHT1(currAccount.STK, req.body.kihan, money);
-                        await giaodich.add(currAccount.STK, money, 1, 5, tktk.NgayMo, account_thanhtoan.DonViTienTe);
+                        await giaodich.add(currAccount.STK, money, 1, 5, account_savings.NgayMo, account_thanhtoan.DonViTienTe);
+                        break;
+                        //Rút tiền + dong tai khoan
+                    case 5:
+                        //cong lai
+                        await taikhoanthanhtoan.CongLai(currAccount.STK, account_savings.TienLaiToanBo);
+                        await giaodich.add(currAccount.STK, account_savings.TienLaiToanBo, 0, 0, account_savings.NgayMo, account_thanhtoan.DonViTienTe);
+                        //dong tk = xoa
+                        await taikhoantietkiem.closeTKTK(currAccount.STK);
                         break;
                 }
             } else {
@@ -86,9 +93,9 @@ router.post('/', asyncHandler(async (req, res) => {
 
                 //cập nhật lại giao dịch 
                 //nhận tiền
-                await giaodich.add(currAccount.STK, account_savings.TienGuiVao, 0, 0, tktk.NgayMo, account_thanhtoan.DonViTienTe);
+                await giaodich.add(currAccount.STK, account_savings.TienGuiVao, 0, 0, account_savings.NgayMo, account_thanhtoan.DonViTienTe);
                 //rút tiền trước kì hạn
-                await giaodich.add(currAccount.STK, money, 1, 4, tktk.NgayMo, account_thanhtoan.DonViTienTe);
+                await giaodich.add(currAccount.STK, money, 1, 4, account_savings.NgayMo, account_thanhtoan.DonViTienTe);
             }
         } catch (err) {
             throw err;
