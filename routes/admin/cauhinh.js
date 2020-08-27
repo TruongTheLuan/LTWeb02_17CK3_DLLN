@@ -13,7 +13,7 @@ router.get('/',asyncHandler(async (req, res)=>{
 }));
 
 router.post('/',asyncHandler(async (req, res)=>{
-    await ThamSo.updateThamSo(req.body.cokihan,req.body.khongkihan, req.body.ngayhethan, req.body.tigiausd);
+    await ThamSo.updateThamSo(req.body.cokihan,req.body.khongkihan, req.body.ngayhethan, req.body.tigiausd, req.body.hanmucusd, req.body.hanmucvnd);
     res.redirect('/admin/cau-hinh');
 }));
    

@@ -79,8 +79,8 @@ router.post('/', asyncHandler(async (req, res) => {
                         //Rút tiền + dong tai khoan
                     case 5:
                         //cong lai
-                        await taikhoanthanhtoan.CongLai(currAccount.STK, account_savings.TienLaiToanBo);
-                        await giaodich.add(currAccount.STK, account_savings.TienLaiToanBo, 0, 0, account_savings.NgayMo, account_thanhtoan.DonViTienTe);
+                        await taikhoanthanhtoan.CongLai(currAccount.STK, (account_savings.TienLaiToanBo + account_savings.TienGuiVao));
+                        await giaodich.add(currAccount.STK, (account_savings.TienLaiToanBo + account_savings.TienGuiVao), 0, 0, account_savings.NgayMo, account_thanhtoan.DonViTienTe);
                         //dong tk = xoa
                         await taikhoantietkiem.closeTKTK(currAccount.STK);
                         break;

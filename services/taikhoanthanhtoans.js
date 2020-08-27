@@ -117,7 +117,7 @@ class TaiKhoanThanhToan extends Model {
     static async CongLai(SoTaiKhoan, SoTienMoi){
         
         return await TaiKhoanThanhToan.update({
-            SoDu: Number(SoTienMoi)
+            SoDu: SoTienMoi
         },{
             where: {
                 SoTaiKhoan

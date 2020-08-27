@@ -132,6 +132,13 @@
                             </div>
                         </div>
                     </div>
+                    <p class="text-danger">
+                        <b>
+                            <% if(errors != "") { %> 
+                                &#9888; <%= errors %>
+                            <% } %>
+                        </b>
+                    </p>
                     <button class="btn btn-primary">Savings</button>
                 <button  class="btn btn-danger">Cancel</button>
                 </form>

@@ -10,7 +10,7 @@ const thamsos = require('../services/thamsos');
 var router = new Router();
 router.get('/', (req, res)=>{
     let currAccount = req.session.user || req.cookies['user'];
-    res.render('internal',{currAccount : currAccount});
+    res.render('internal',{currAccount : currAccount, errors: ""});
 });
 //tìm tên theo tài khoản
 router.post('/tim-ten',asyncHandler( async (req,res)=>{
@@ -46,7 +46,23 @@ router.post('/',asyncHandler( async (req,res)=>{
     let currAccount = req.session.user || req.cookies['user'];
     let thamso = await thamsos.getThamSo();
 
+    
+
     let tktt_gui = await taikhoanthanhtoan.findAccountBySoTaiKhoan(req.body.sotaikhoannguoigui); 
+
+
+    // if(req.body.sotien > thamso[0].HanMucUSD && tktt_gui.DonViTienTe == "USD") {
+    //     if(Number( DongBoHoaTienTe(req.body.sotien,req.body.donvi,tktt_gui.DonViTienTe, thamso[0].TiGiaUSD)) > tktt_gui.SoDu)
+    //          return res.render('internal',{currAccount : currAccount, errors: "Vượt quá hạn mức quy định"});
+    // }
+    // else if(req.body.sotien > thamso[0].HanMucUSD && tktt_gui.DonViTienTe == "USD"){
+    //     if(Number( DongBoHoaTienTe(req.body.sotien,req.body.donvi,tktt_gui.DonViTienTe, thamso[0].TiGiaUSD)) > tktt_gui.SoDu)
+    //          return res.render('internal',{currAccount : currAccount, errors: "Vượt quá hạn mức quy định"});
+    // }
+
+     if(   (req.body.sotien < thamso[0].HanMucUSD && tktt_gui.DonViTienTe == "USD") ||
+           (req.body.sotien < thamso[0].HanMucVND && tktt_gui.DonViTienTe == "VND")) {
+
     await taikhoanthanhtoan.updateSoTien(req.body.sotaikhoannguoigui,Number( DongBoHoaTienTe(req.body.sotien,req.body.donvi,tktt_gui.DonViTienTe, thamso[0].TiGiaUSD)));
     
     //không cần đồng bộ hóa tiền tệ trong giao dịch
@@ -71,7 +87,10 @@ router.post('/',asyncHandler( async (req,res)=>{
     // await Email.send(user_nhan.email, "Thông Báo Nhận Tiền",`1 Giao dịch mới mã giao dịch là : ${giaodichnhan.id}
     //                     với số tiền là ${req.body.sotien} từ tài khoản ${req.body.sotaikhoannguoigui} \n 
     //                     với nội dung : ${req.body.noidung}`);
-    res.redirect('back');
+    return res.redirect('back');
+    } else{
+        return res.render('internal',{currAccount : currAccount, errors: "Vượt quá hạn mức quy định"});
+    }
 }));
 
 module.exports = router;
