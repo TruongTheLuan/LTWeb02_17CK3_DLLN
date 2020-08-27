@@ -10,14 +10,22 @@ class GiaoDich extends Model {
     }
     //tim toan bo ma giao dich
     static async findAllGiaoDich(){
-        return GiaoDich.findAll();
+        return GiaoDich.findAll({
+            order: [
+                ['NgayThucHien', 'DESC']
+            ],
+            }     
+        );
     }
     //tim giao dich bang so tai khoan
     static async findGiaoDichBySTK(SoTaiKhoan){
         return GiaoDich.findAll({
             where:{
                 SoTaiKhoan
-            }
+            },
+            order: [
+                ['NgayThucHien', 'DESC']
+            ],
         })
     }
     //them giao dich
